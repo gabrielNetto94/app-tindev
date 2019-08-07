@@ -13,13 +13,9 @@ module.exports = {
             return res.status(400).json({error: 'Dev not exists'});//retorna o status = erro
         }
 
-        if(targetDev.likes.includes(loggedDev._id)){//quando os dois tiverem dado like um no outro: match
-            console.log("deu match");
-        }
+        loggedDev.dislikes.push(targetDev._id);
 
-        loggedDev.likes.push(targetDev._id);
-
-        await loggedDev.save();
+        await loggedDev.save();//armazena no banco
 
         return res.json(loggedDev);
     }
