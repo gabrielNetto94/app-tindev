@@ -26,7 +26,7 @@ module.exports = {
         const userExists = await Dev.findOne({user:username});//busca o usuário no mongo
 
         if(userExists){//se userExists = true retorna o usuário cadastrado no banco
-            console.log(`User already exists \n${userExists.name}`);
+            console.log(`User already exists: ${userExists.name}`);
             return res.json(userExists);
         }
 
@@ -41,7 +41,7 @@ module.exports = {
             avatar
         });
         
-        console.log(`User created \n${userExists.name}`);
+        console.log(`User created: ${userExists.name}`);
 
         return res.json(dev);
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Main.css';
 
 import api from '../services/api';
@@ -25,7 +26,12 @@ export default function Main({ match }){
     }, [match.params.id]);
 
     async function handleLike(id){
-        console.log('like',id);
+        // 1º param caminho da api, 2º corpo do request, 3º header
+        await api.post(`http://localhost:3333/devs/${id}/likes`, null,{
+            headers:{user: match.params.id},
+        });
+
+        setUsers(users.filter(user => user._id !== id));
     }
 
     async function handleDislike(id){
@@ -39,8 +45,11 @@ export default function Main({ match }){
 
     return(
         <div className="main-container">
-            <img src={logo} alt="Tindev"/>
-               { users.lenght > 0 ? (
+            {/* importa o Link do react-router-dom para redirecionar para outra rota */}
+            <Link to="/">
+                <img src={ logo } alt="Tindev" />
+            </Link>
+               {//users.lenght > 0 ? (
                    <ul>
                     {users.map (user => ( //users.map percorre o array de usuarios e cria um li para cada um inserindo as informações
                         <li key={user._id}>
@@ -51,7 +60,7 @@ export default function Main({ match }){
                             </footer>
 
                             <div className="buttons">
-                                <button type="button" onClick={ ()=> handleDislike(user._id) } /*usa a awwoy function () => para o método não ser executado instantaneamente, apenas quando for clicado*/>
+                                <button type="button" onClick={ ()=> handleDislike(user._id) } /*usa a arrow function () => para o método não ser executado instantaneamente, apenas quando for clicado*/>
                                     <img src={dislike} alt="Dislike"/>
                                 </button>
 
@@ -62,9 +71,10 @@ export default function Main({ match }){
                         </li>
                     ))}
                 </ul>
-               ) : (
-                <div className="empty">Acabou :(</div>
-               ) }
+                /* ) : ( 
+                <div className="empty">Acabou :(</div> 
+                 ) } */
+                }
         </div>
     )
 }

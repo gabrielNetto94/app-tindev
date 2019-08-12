@@ -14,7 +14,7 @@ module.exports = {
         }
 
         if(targetDev.likes.includes(loggedDev._id)){//quando os dois tiverem dado like um no outro: match
-            console.log("deu match");
+            console.log("MATCH!!");
         }
 
         loggedDev.likes.push(targetDev._id);
