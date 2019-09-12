@@ -15,16 +15,14 @@ export default function Login({ history }){
             username:username,
         });
 
-        const { _id /*, avatar*/ } = response.data;
+        const { _id , avatar } = response.data;
 
-        
-        //history.push(`/dev/${_id}/${avatar}`);
-        history.push({
-            pathname : `/dev/${_id}`,
-            teste:"responseJson.userFormat"
-        });
+        // history.push({
+        //     pathname : `/dev/${_id}/${avatar}`,
+        //     teste: avatar
+        // });
 
-        history.push(`/dev/${_id}`);
+        history.push(`/dev/${_id}/${avatar}`);
     }
 
     return (

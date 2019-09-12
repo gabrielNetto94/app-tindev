@@ -10,8 +10,6 @@ import dislike from '../assets/dislike.svg';
 
 export default function Main({ match }){
 
-    //console.log(match.params.state);
-
     const [users, setUsers] = useState([]);
 
     useEffect(() => {//método para buscar os devs da api
